@@ -6,7 +6,7 @@ Web browser multiplayer turn based dice game, a varian of Liar's Dice.
 
 **Stay tuned for a hosted version coming out very soon**
 
-For the best experience, view in a mobile browser.
+For the best experience, view in a **mobile browser**.
 
 <br>
 

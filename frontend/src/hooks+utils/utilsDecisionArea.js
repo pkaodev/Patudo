@@ -1,6 +1,6 @@
 //returns true/false if player has been knocked out
 export const isPlayerOut = (uid, gameState) => {
-    return gameState.losers.some((player) => player.uid === uid);
+  return gameState.losers.some((player) => player.uid === uid);
 };
 
 /*
@@ -11,19 +11,24 @@ export const isPlayerOut = (uid, gameState) => {
  */
 
 export const findValidMoves = (gameState, uid) => {
-  const { moveNumber, currentPlayer, players } = gameState;
+  const { moveNumber, currentPlayer, players, currentBet } = gameState;
+  const [currBetNumberOfDice, ignore] = currentBet.split(",");
+  const totalDice = gameState.players.reduce((p, c) => p + c.numberOfDice, 0);
 
   return {
-    bet: players[currentPlayer]?.uid === uid,
+    bet:
+      Number(currBetNumberOfDice) < totalDice &&
+      players[currentPlayer]?.uid === uid,
     bs:
-      moveNumber !== 0 && (players[currentPlayer].uid === uid ||
-      players[(currentPlayer + players.length - 1) % players.length].uid !==
-        uid),
+      moveNumber !== 0 &&
+      (players[currentPlayer].uid === uid ||
+        players[(currentPlayer + players.length - 1) % players.length].uid !==
+          uid),
     cabbages:
       moveNumber !== 0 &&
-      (players[currentPlayer].uid !== uid &&
+      players[currentPlayer].uid !== uid &&
       players[(currentPlayer + players.length - 1) % players.length].uid !==
-        uid),
+        uid,
   };
 };
 
@@ -33,7 +38,6 @@ export const findValidMoves = (gameState, uid) => {
 
 //     betNumberOfDice = Number(betNumberOfDice);
 //     betFaceValue = Number(betFaceValue);
-
 
 // }
 
