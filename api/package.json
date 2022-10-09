@@ -1,4 +1,7 @@
 {
+  "engines" : {
+    "node" : ">= 18.0.0"
+  },
   "name": "api",
   "private": true,
   "version": "0.0.0",
@@ -18,7 +21,8 @@
     "firebase-admin": "^11.0.1"
   },
   "scripts": {
-    "start": "nodemon ./app.js",
+    "start": "node ./app.js",
+    "nodemon": "nodemon ./app.js",
     "test": "jest"
   }
 }
