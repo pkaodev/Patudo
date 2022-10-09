@@ -1,4 +1,6 @@
 Sooner:
+-account for keyboard on mobile local
+-fix party mode
 -display opponent text
 -add something to loser area
 -dice roll animation
