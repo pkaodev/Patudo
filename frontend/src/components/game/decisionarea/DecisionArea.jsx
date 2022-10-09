@@ -15,9 +15,6 @@ export default function DecisionArea() {
 
   const validMoves = findValidMoves(gameState, currentUser.uid);
 
-console.log('validMoves', validMoves)
-console.log('validMoves.bs', validMoves.bs)
-
   return (
     <div className="decision-area-holder flex-row" >
       <div className={`decision-area flex-row ${gameState.players[gameState.currentPlayer]?.uid === currentUser.uid ? "current-border" : ""}`} >
