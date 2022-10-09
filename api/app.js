@@ -18,12 +18,12 @@ app.use(cors())
 app.use(express.json());
 
 //SHOW INCOMING REQUESTS!!!
-app.use((req, res, next) => {
+// app.use((req, res, next) => {
     // console.log(req.headers.patauthuid)
     // console.log(req.headers.patauthtoken)
-    console.log('req.body', req.body)
-    next()
-})
+    // console.log('req.body', req.body)
+    // next()
+// })
 
 app.put('/tester', authoriser)
 
