@@ -40,6 +40,7 @@ export default function MenuContents({
       <div className={appBGState === 1 && 'menu-btn--party-mode--on-holder'}>
       <button
         onClick={() => {
+          //!!!temporarily disabled, Minified React error #130
           setAppBGState(appBGState === 0 ? 1 : 0);
           // setPopup(false);
         }}

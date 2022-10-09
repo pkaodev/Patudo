@@ -4,7 +4,14 @@
 
 Web browser multiplayer turn based dice game, a varian of Liar's Dice.
 
-**Stay tuned for a hosted version coming out very soon**
+**Hosted at:
+<br>
+https://pkaodev.github.io/Patudo-v0/**
+<br>
+<br>
+Unfortunately party mode has had to been been temporarily disabled due to an issue with the production build
+<br>
+<br>
 
 For the best experience, view in a **mobile browser**.
 
