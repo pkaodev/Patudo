@@ -16,6 +16,7 @@ Kinda sooner:
 -join link directly to lobby (enter nickname screen)
 -resize for 6 players
 -select/customise? avatars
+-display knocked out players
 
 
 Later:
@@ -27,6 +28,7 @@ Later later:
 -user account info (game history etc)
 -chat functionality
 -matchmaking (auto, join lobby?)
+-max timers
 -FEATURES (rulesets, #players, ) - setup page/part of lobby
 
 
