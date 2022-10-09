@@ -47,6 +47,7 @@ export default function MenuContents({
       >
         Party mode:<div>&nbsp;</div> <div className={`${appBGState === 1 && 'menu-btn--party-mode--on2'}`}><p className={`flex-row menu-btn--party-mode ${appBGState === 1 && 'menu-btn--party-mode--on1'}`}>{appBGState ? "On" : "Off"}</p></div>
       </button>
+      (warning -  sound!)
       </div>
       <br />
     </div>

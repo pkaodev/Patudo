@@ -250,7 +250,7 @@ export const apiPUTMove = async (e, currentUser, gameCode, moveObject) => {
     });
 
     //HANDLE THIS RETURN!!!
-    console.log('PUT RETURN: ', resStream.json())
+    // console.log('PUT RETURN: ', resStream.json())
 
   } catch (e) {
     console.error("ERROR-apiPUTMove", e);

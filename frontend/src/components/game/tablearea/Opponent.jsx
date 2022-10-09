@@ -16,7 +16,7 @@ export default function Opponent({ props: { player, isCurrent, isOver } }) {
     >
       <img className="opponent__avatar flex-column" src={!isOver ? avatar : king_white}></img>
       <div className="opponent__nickname">{player.nickname}</div>
-      <div className="opponent__dice-holder flex-row">
+      <div className="opponent__dice-holder">
         {Array.from(Array(player.numberOfDice)).map((value, index) => {
           return <img key={index} className="opponent__dice--q" src={dice_q_white}></img>;
         })}
