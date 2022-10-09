@@ -12,6 +12,9 @@ https://pkaodev.github.io/Patudo-v0/**
 Unfortunately party mode has had to been been temporarily disabled due to an issue with the production build
 <br>
 <br>
+backend currently hosted on google cloud run
+<br>
+<br>
 
 For the best experience, view in a **mobile browser**.
 
