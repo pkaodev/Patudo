@@ -15,9 +15,13 @@ Unfortunately party mode has had to been been temporarily disabled due to an iss
 backend currently hosted on google cloud run
 <br>
 <br>
-
 For the best experience, view in a **mobile browser**.
-
+<br>
+<br>
+**NOTE!!!**
+<br>
+Lots of features are currently ~~missing~~ under development (like that lovely error message that's meant to tell you your password is weak and that's why you can't sign up).
+<br>
 <br>
 
 ## Tech stack
