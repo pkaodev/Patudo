@@ -43,7 +43,9 @@ export default function MenuContents({
       <button
         onClick={() => {
           //!!!temporarily disabled, Minified React error #130
-          setAppBGState(appBGState === 0 ? 1 : 0);
+          // setAppBGState(appBGState === 0 ? 1 : 0);
+
+          //Bit risky removing pop up when sound is starting
           // setPopup(false);
         }}
         className="flex-row"
