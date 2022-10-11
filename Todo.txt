@@ -1,5 +1,5 @@
 Sooner:
--account for keyboard on mobile local
+-account for keyboard on mobile lol
 -fix party mode
 -display opponent text
 -add something to loser area

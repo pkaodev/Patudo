@@ -2,6 +2,8 @@
 import cancel_black from '../images/patudo/cancel-black.png';
 
 /**
+to add this to a component:
+ 
 in main:
 const [popup, setPopup] = useState(false);
 
@@ -12,9 +14,6 @@ onClick={()=>{setPopup(true)}}
  {popup && <Popup setPopup={setPopup} color={'5'}>  //pick color from 1-7 atm
         <HowToPlay />
       </Popup>}
-
-give setPopup as prop to child component to close popup
-
 
  */
 

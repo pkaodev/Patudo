@@ -15,7 +15,8 @@ export default function MenuContents({
   const navigate = useNavigate();
   return (
     <div className="flex-column menu-content">
-      <h2 className={`menu-title ${appBGState === 1 && 'menu-logo--party-mode'}`}>Menu</h2>
+      {/* <h2 className={`menu-title ${appBGState === 1 && 'menu-logo--party-mode'}`}>Menu</h2> */}
+      <h2 className={`menu-title ${appBGState === 1 ? 'menu-logo--party-mode' : undefined}`}>Menu</h2>
       <button
         onClick={() => {
           navigate("/home");
@@ -37,19 +38,21 @@ export default function MenuContents({
       <SignInOut setPopup={setPopup} />
       <br />
 
-      <div className={appBGState === 1 && 'menu-btn--party-mode--on-holder'}>
+      {/* <div className={appBGState === 1 && 'menu-btn--party-mode--on-holder'}> */}
+      <div className={appBGState === 1 ? 'menu-btn--party-mode--on-holder' : undefined}>
       <button
         onClick={() => {
           //!!!temporarily disabled, Minified React error #130
-          // setAppBGState(appBGState === 0 ? 1 : 0);
+          setAppBGState(appBGState === 0 ? 1 : 0);
           // setPopup(false);
         }}
         className="flex-row"
       >
-        Party mode:<div>&nbsp;</div> <div className={`${appBGState === 1 && 'menu-btn--party-mode--on2'}`}><p className={`flex-row menu-btn--party-mode ${appBGState === 1 && 'menu-btn--party-mode--on1'}`}>{appBGState ? "On" : "Off"}</p></div>
+        Party mode:<div>&nbsp;</div> <div className={`${appBGState === 1 ? 'menu-btn--party-mode--on2' : undefined}`}><p className={`flex-row menu-btn--party-mode ${appBGState === 1 ? 'menu-btn--party-mode--on1' : undefined}`}>{appBGState ? "On" : "Off"}</p></div>
       </button>
-      (warning -  sound!)
       </div>
+      warning -  sound!
+      <br />
       <br />
     </div>
   );

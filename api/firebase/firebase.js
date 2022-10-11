@@ -1,10 +1,8 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import { getFirestore } from "firebase/firestore";
-
 import * as dotenv from 'dotenv'
 dotenv.config()
-
 
 //CHECKLATER!!!
 //https://vitejs.dev/guide/env-and-mode.html
