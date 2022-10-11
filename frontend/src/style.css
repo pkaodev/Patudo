@@ -304,11 +304,11 @@ button:active {
 }
 
 .patudo-logo {
-  position: absolute;
+  position: relative;
   top: 0.5vmin;
   left: 10vmin;
   font-family: "AtarianSystem-Extended-Bold";
-  font-size: 11vmin;
+  font-size: 6vh;
   color: rgba(0, 0, 0, 0.8);
   text-shadow: 0.5vmin 0.5vmin rgba(0, 0, 0, 0.5);
 }
@@ -365,16 +365,19 @@ button:active {
   justify-content: space-between;
 }
 .navbar-edge1 {
+  position: relative;
   height: 7%;
   width: 100%;
   background-color: rgba(var(--color5), 0.8);
 }
 .navbar-edge2 {
+  position: relative;
   height: 7%;
   width: 100%;
   background-color: rgba(var(--color5), 0.5);
 }
 .navbar-edge3 {
+  position: relative;
   height: 7%;
   width: 100%;
   background-color: rgba(var(--color5), 0.3);
@@ -382,15 +385,15 @@ button:active {
 .menu-holder {
 }
 .menu-btn {
-  width: 8vmin;
-  height: 8vmin;
-  position: absolute;
-  top: 0.75vh;
+  width: 5vh;
+  height: 5vh;
+  position: relative;
+  top: 0.25vh;
   right: 1vh;
   opacity: 0.8;
-  outline: rgba(0, 0, 0, 0.2) solid 0.5vmin;
+  outline: rgba(0, 0, 0, 0.2) solid 2px;
   border-radius: 100%;
-  box-shadow: 0.2vmin 0.8vmin rgba(0, 0, 0, 0.5);
+  box-shadow: 0.1vh 0.5vh rgba(0, 0, 0, 0.5);
 }
 
 .menu-btn--party-mode {
@@ -485,6 +488,7 @@ button:active {
 .main-holder {
   height: 90%;
   width: 100%;
+  overflow: auto;
 }
 .menu-content {
   width: 55vw;
