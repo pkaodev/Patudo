@@ -26,7 +26,7 @@ export default function Register() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      navigate("/find-game");
+      navigate("/Patudo-v0/find-game");
     } catch {
       setError("Failed to create an account");
     }

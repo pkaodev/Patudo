@@ -21,8 +21,6 @@ import Song6 from "./audio/Song6.mp3";
 import Song7 from "./audio/Song7.mp3";
 import Song8 from "./audio/Song8.mp3";
 
-console.log(ReactAudioPlayer)
-
 const songArray = [
   Song0,
   Song1,
@@ -34,6 +32,8 @@ const songArray = [
   Song7,
   Song8,
 ];
+
+//!!!deal with /Patudo-v0 routing stuff
 
 export default function AppRouter() {
   const [appBGState, setAppBGState] = useState(0);
@@ -55,12 +55,12 @@ export default function AppRouter() {
           <Navbar BGProps={{ appBGState, setAppBGState }} />
           <div className="main-holder">
             <Routes>
-              <Route path="/home" element={<PAGE_Home />} />
-              <Route path="/login-register" element={<PAGE_LoginRegister />} />
-              <Route path="/find-game" element={<PAGE_FindGame />} />
-              <Route path="/lobby/:lobbyCode" element={<PAGE_Lobby />} />
-              <Route path="/game/:gameCode" element={<PAGE_Game />} />
-              <Route path="*" element={<Navigate to="/home" />} />
+              <Route path="/Patudo-v0/home" element={<PAGE_Home />} />
+              <Route path="/Patudo-v0/login-register" element={<PAGE_LoginRegister />} />
+              <Route path="/Patudo-v0/find-game" element={<PAGE_FindGame />} />
+              <Route path="/Patudo-v0/lobby/:lobbyCode" element={<PAGE_Lobby />} />
+              <Route path="/Patudo-v0/game/:gameCode" element={<PAGE_Game />} />
+              <Route path="*" element={<Navigate to="/Patudo-v0/home" />} />
             </Routes>
           </div>
         </div>

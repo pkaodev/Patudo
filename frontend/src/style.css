@@ -247,6 +247,7 @@ button:active {
   height: 100vh;
   width: 100vw;
   position: absolute;
+  padding: 0;
 }
 .app-background {
   height: 100vh;
@@ -488,7 +489,8 @@ button:active {
 .main-holder {
   height: 90%;
   width: 100%;
-  overflow: auto;
+  /* overflow: auto; */
+  /* padding: 0; */
 }
 .menu-content {
   width: 55vw;
@@ -951,6 +953,10 @@ button:active {
 }
 
 /*---------------------------------------------------------------------------------------*/
+
+.page-login-register {
+  overflow: auto;
+}
 
 .login-register-holder {
   width: 100%;

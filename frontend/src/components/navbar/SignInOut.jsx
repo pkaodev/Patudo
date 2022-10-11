@@ -1,7 +1,6 @@
 import { useAuth } from "../../firebase/AuthContext";
 import SignoutButton from "../authentication/SignoutButton";
 import { Link } from "react-router-dom";
-//import useNavigate
 import { useNavigate } from "react-router-dom";
 
 export default function SignInOut({setPopup}) {
@@ -14,7 +13,7 @@ export default function SignInOut({setPopup}) {
       ) : (
         <button className="btn-one"
           onClick={() => {
-            navigate("/login-register");
+            navigate("/Patudo-v0/login-register");
             setPopup(false)
           }}
         >

@@ -11,5 +11,5 @@ import { useAuth } from "../../firebase/AuthContext";
 
 export default function PrivateRoute({ children }) {
   const { currentUser } = useAuth();
-  return currentUser ? children : <Navigate to="/login-register" />;
+  return currentUser ? children : <Navigate to="/Patudo-v0/login-register" />;
 }

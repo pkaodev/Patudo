@@ -19,7 +19,7 @@ export default function MenuContents({
       <h2 className={`menu-title ${appBGState === 1 ? 'menu-logo--party-mode' : undefined}`}>Menu</h2>
       <button
         onClick={() => {
-          navigate("/home");
+          navigate("/Patudo-v0/home");
           setPopup(false);
         }}
       >
@@ -28,7 +28,7 @@ export default function MenuContents({
       <br />
       <button
         onClick={() => {
-          navigate("/find-game");
+          navigate("/Patudo-v0/find-game");
           setPopup(false);
         }}
       >

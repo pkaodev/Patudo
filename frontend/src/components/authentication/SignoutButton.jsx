@@ -15,7 +15,7 @@ export default function SignoutButton({setPopup}) {
         setError("");
         try {
           await logout();
-          navigate("/home");
+          navigate("/Patudo-v0/home");
           setPopup(false)
         } catch {
           setError("Failed to logout");

@@ -29,7 +29,7 @@ export default function PAGE_Lobby() {
   //if game has started navigate to /game/:gameCode
   useEffect(() => {
     if (lobbyState.gameHasStarted) {
-      navigate(`/game/${lobbyCode}`);
+      navigate(`/Patudo-v0/game/${lobbyCode}`);
     }
   }, [lobbyState.gameHasStarted]);
   

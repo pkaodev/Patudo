@@ -77,7 +77,7 @@ export const handleMakeLobby = async (e, uid, nickname, navigate) => {
       lobbyObj
     );
 
-    navigate(`/lobby/${lobbyCode}`);
+    navigate(`/Patudo-v0/lobby/${lobbyCode}`);
 
   } catch (e) {
     console.error("ERROR-handleMakeLobby", e);
@@ -129,7 +129,7 @@ export const handleJoinLobby = async (
     }
 
     //navigate to '/lobby/:lobbyCode'
-    navigate(`/lobby/${lobbyCode}`);
+    navigate(`/Patudo-v0/lobby/${lobbyCode}`);
   } catch (e) {
     console.error("ERROR-handleJoinLobby", e);
   }
