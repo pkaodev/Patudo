@@ -10,7 +10,17 @@ import PAGE_Game from "./components/game/PAGE_Game";
 import { AuthProvider } from "./firebase/AuthContext";
 import { useEffect, useState } from "react";
 
+
+
 import ReactAudioPlayer from "react-audio-player";
+//https://github.com/justinmc/react-audio-player/issues/135
+//stemming from
+//https://github.com/vitejs/vite/issues/2139
+//this is needed for the audio player to work in build, but works fine in dev without it
+const HackyRap = ReactAudioPlayer.default ? ReactAudioPlayer.default : ReactAudioPlayer;
+
+
+
 import Song0 from "./audio/Song0.mp3";
 import Song1 from "./audio/Song1.mp3";
 import Song2 from "./audio/Song2.mp3";
@@ -33,8 +43,8 @@ const songArray = [
   Song8,
 ];
 
-//!!!deal with /Patudo-v0 routing stuff
 
+//!!!deal with /Patudo-v0 routing stuff
 export default function AppRouter() {
   const [appBGState, setAppBGState] = useState(0);
   const [songNum, setSongNum] = useState(0);
@@ -46,6 +56,7 @@ export default function AppRouter() {
   const nextSong = () => {
     setSongNum((songNum + 1) % songArray.length);
   };
+
 
   return (
     <BrowserRouter>
@@ -64,7 +75,7 @@ export default function AppRouter() {
             </Routes>
           </div>
         </div>
-        { appBGState && <ReactAudioPlayer
+        { appBGState && <HackyRap
           src={songArray[songNum]}
           onEnded={nextSong}
           autoPlay
