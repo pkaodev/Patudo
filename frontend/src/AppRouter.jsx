@@ -21,6 +21,8 @@ import Song6 from "./audio/Song6.mp3";
 import Song7 from "./audio/Song7.mp3";
 import Song8 from "./audio/Song8.mp3";
 
+console.log(ReactAudioPlayer)
+
 const songArray = [
   Song0,
   Song1,
