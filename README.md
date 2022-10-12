@@ -2,39 +2,38 @@
 
 ---
 
-Web browser multiplayer turn based dice game, a varian of Liar's Dice.
+Web browser multiplayer turn based dice game, a variant of <a href="https://en.wikipedia.org/wiki/Liar%27s_dice" target="_blank">Liar's Dice</a>.
 
 **Hosted at:
 <br>
 <a href="https://pkaodev.github.io/Patudo-v0/" target="_blank">https://pkaodev.github.io/Patudo-v0/</a>**
 <br>
 <br>
-backend currently hosted on google cloud run
+The REST API is currently hosted on Cloud Run.
 <br>
 <br>
-For the best experience, view in a **mobile browser**.
+For the best experience, view in a **mobile browser**.  Really, you'll have a better time on a mobile sized browser.
 <br>
 <br>
 **NOTE!!!**
 <br>
-Lots of features are currently ~~missing~~ under development (like that lovely error message that's meant to tell you your password is weak and that's why you can't sign up).
+Lots of features are currently ~~missing~~ under development.  Everything **should be** playable.
 <br>
 <br>
 
-## Tech stack
+## App design
 
 ---
 
-- ReactJS
-- ExpressJS
-- Firebase authentication
-- Firestore database
+- Front end - ReactJS, firebase authentication, and firestore to subscribe to live updates of lobby/game states from the database.
+- REST API - ExpressJS, validates player actions and updates the database.
+- Database - Firestore
 
 
 <br>
 
 
-## Installation
+## Local installation
 
 ---
 
@@ -93,7 +92,7 @@ DB_GAMES=games
 DB_HISTORY=history
 DB_PRIVATE=private
 ```
-Additionally, you will need to create a **serviceAccountKey.json** file in the */api/* directory. You can get this file from your firebase project settings.
+Additionally, you will need to create a **serviceAccountKey.json** (it comes with a different name so you will have to rename it) file in the */api/* directory. You can get this file from your firebase project settings.
 
 After that run 
 `npm install` in both */api/* and */frontend/* directories.

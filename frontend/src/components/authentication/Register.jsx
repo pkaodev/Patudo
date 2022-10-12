@@ -17,7 +17,6 @@ export default function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    //need to add logic to check if password matches min criteria!!!
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
     }
@@ -27,8 +26,13 @@ export default function Register() {
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
       navigate("/Patudo-v0/find-game");
-    } catch {
+    } catch (err) {
+      //err.code === "auth/email-already-in-use"
+      if (err.code === "auth/email-already-in-use") {
+        setError("Email already in use");
+      } else {
       setError("Failed to create an account");
+      }
     }
 
     setLoading(false);
@@ -37,6 +41,7 @@ export default function Register() {
   return (
     <div className="register-holder flex-column">
       <p className='padding-l'>Sign Up</p>
+      {error && <p className="login-register-error">{error}</p>}
       <form className="flex-column" id="register-form" onSubmit={handleSubmit}>
         <p className="padding-s">email</p>
         <input type="email" id="register-email" ref={emailRef} required />
