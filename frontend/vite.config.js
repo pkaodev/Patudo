@@ -8,9 +8,9 @@ export default defineConfig({
   plugins: [react()],
 
   // mode: "development",
-
   //!!!figure out what this actually does
   // build: {
   //   minify: false,
   // }
+
 })

@@ -12,12 +12,12 @@ import { useEffect, useState } from "react";
 
 
 
-import ReactAudioPlayer from "react-audio-player";
+import RAP from "react-audio-player";
 //https://github.com/justinmc/react-audio-player/issues/135
 //stemming from
 //https://github.com/vitejs/vite/issues/2139
 //this is needed for the audio player to work in build, but works fine in dev without it
-const HackyRap = ReactAudioPlayer.default ? ReactAudioPlayer.default : ReactAudioPlayer;
+const ReactAudioPlayer = RAP.default ? RAP.default : RAP;
 
 
 
@@ -45,6 +45,7 @@ const songArray = [
 
 
 //!!!deal with /Patudo-v0 routing stuff
+//!!!extract audio player
 export default function AppRouter() {
   const [appBGState, setAppBGState] = useState(0);
   const [songNum, setSongNum] = useState(0);
@@ -75,7 +76,7 @@ export default function AppRouter() {
             </Routes>
           </div>
         </div>
-        { appBGState && <HackyRap
+        { appBGState && <ReactAudioPlayer
           src={songArray[songNum]}
           onEnded={nextSong}
           autoPlay

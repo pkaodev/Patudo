@@ -22,8 +22,8 @@ import {ContextFindGame} from "../../CONTEXTS";
 
 export default function PAGE_FindGame() {
   const [nickname, setNickname] = useState('');
-
   const [popup, setPopup] = useState(false);
+  const [error, setError] = useState('');
 
 
   return (

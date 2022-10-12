@@ -20,8 +20,15 @@ export default function Login() {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       navigate("/Patudo-v0/find-game");
-    } catch {
-      setError("Failed to sign in");
+    } catch (err) {
+      console.log(err.code);
+      if (err.code === "auth/user-not-found") {
+        setError("User not found");
+      } else if (err.code === "auth/wrong-password") {
+        setError("Wrong password");
+      } else {
+        setError("Failed to log in");
+      }
     }
     setLoading(false);
   }
@@ -29,6 +36,7 @@ export default function Login() {
   return (
     <div className="login-holder flex-column">
       <p className='padding-l'>Log In</p>
+      {error && <p className="login-register-error">{error}</p>}
       <form className="flex-column" id="login-form" onSubmit={handleSubmit}>
       <p className="padding-s">email</p>
         <input type="email" id="login-email" ref={emailRef} required />

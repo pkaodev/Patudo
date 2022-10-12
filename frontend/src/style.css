@@ -316,6 +316,7 @@ button:active {
 .patudo-logo-0 {
 }
 .patudo-logo-1 {
+  /* text-shadow: 0vmin 0vmin rgba(0, 0, 0, 0); */
   background-image: linear-gradient(
     -225deg,
     rgba(var(--color5), 1) 0%,
@@ -989,6 +990,13 @@ button:active {
   position: relative;
 }
 .nickname-holder {
+}
+.login-register-error {
+  /* color: red; */
+  background-color: rgba(var(--color1), 1);
+  padding: 0.5vmin;
+  border-radius: 1vmin;
+  text-align: center;
 }
 
 .create-join-holder {
