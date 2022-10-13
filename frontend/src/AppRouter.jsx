@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navigate } from "react-router-dom";
-import "./style.css";
+import "./index.css";
 import Navbar from "./components/navbar/Navbar";
 import PAGE_Home from "./components/PAGE_Home";
 import PAGE_LoginRegister from "./components/authentication/PAGE_LoginRegister";
