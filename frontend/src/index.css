@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -158,21 +163,6 @@ table {
       format("truetype");
 }
 @font-face {
-  font-family: "Rooster";
-  src: local("Rooster"),
-    url("./fonts/rooster-font/RoosterPersonalUse-3z8d8.ttf") format("truetype");
-}
-@font-face {
-  font-family: "FiraSans-Medium";
-  src: local("FiraSans-Medium"),
-    url("./fonts/Fira_Sans/FiraSans-Medium.ttf") format("truetype");
-}
-@font-face {
-  font-family: "OutrunFuture-Bold";
-  src: local("OutrunFuture-Bold"),
-    url("./fonts/outrun_future/Outrun future Bold.otf") format("truetype");
-}
-@font-face {
   font-family: "AtarianSystem-Extended-Bold";
   src: local("AtarianSystem-Extended-Bold"),
     url("./fonts/AtarianSystem/sf-atarian-system.extended-bold.ttf")
@@ -221,8 +211,6 @@ button:active {
 
 /*---------------------------------------------------------------------------------------*/
 :root {
-  --title-size: 32px;
-  --text-size: 16px;
   --color1: 255, 182, 0;
   --color2: 68, 169, 204;
   --color3: 235, 86, 58;
@@ -383,8 +371,6 @@ button:active {
   height: 7%;
   width: 100%;
   background-color: rgba(var(--color5), 0.3);
-}
-.menu-holder {
 }
 .menu-btn {
   width: 5vh;
@@ -992,7 +978,6 @@ button:active {
 .nickname-holder {
 }
 .login-register-error {
-  /* color: red; */
   background-color: rgba(var(--color1), 1);
   padding: 0.5vmin;
   border-radius: 1vmin;

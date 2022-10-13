@@ -1,14 +1,15 @@
 Sooner:
 -account for keyboard on mobile lol
--fix party mode
--display opponent text
+-display opponent text/deciding... indicator
 -add something to loser area
 -dice roll animation
--error messages + requirements etc for log in + register
+-make decision buttons nicer
+-better decision area feedback
 -prompt/button 'play again?' after game
 -update how to play / move to landing page?
 
 Kinda sooner:
+-fetch-->axios
 -testing!!!
 -timing for parts of move to render
 -purify functions
@@ -19,6 +20,8 @@ Kinda sooner:
 -resize for 6 players
 -select/customise? avatars
 -display knocked out players
+-lobby/game creation to go through API
+-firebase rules for privileges
 
 
 Later:
@@ -27,7 +30,7 @@ Later:
 -typescript?
 
 Later later:
--user account info (game history etc)
+-user account info (game history etc) page
 -chat functionality
 -matchmaking (auto, join lobby?)
 -max timers
