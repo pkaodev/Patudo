@@ -6,7 +6,7 @@ Web browser multiplayer turn based dice game, a variant of <a href="https://en.w
 
 **Hosted at:
 <br>
-<a href="https://pkaodev.github.io/Patudo-v0/" target="_blank">https://pkaodev.github.io/Patudo-v0/</a>**
+<a href="https://patudo.netlify.app/" target="_blank">https://patudo.netlify.app/</a>**
 <br>
 <br>
 The REST API is currently hosted on Cloud Run.
