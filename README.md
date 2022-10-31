@@ -3,21 +3,26 @@
 ---
 
 Web browser multiplayer turn based dice game, a variant of <a href="https://en.wikipedia.org/wiki/Liar%27s_dice" target="_blank">Liar's Dice</a>.
+<br>
+<br>
+Create an account, host a lobby, share the lobby code with friends, and then play together!
+<br>
+<br>
 
 **Hosted at:
 <br>
 <a href="https://patudo.netlify.app/" target="_blank">https://patudo.netlify.app/</a>**
 <br>
 <br>
-The REST API is currently hosted on Cloud Run.
+The REST API is currently hosted on Google Cloud Run.
 <br>
 <br>
-For the best experience, view in a **mobile browser**.  Really, you'll have a better time on a mobile sized browser.
+For the best experience, view in a **mobile sized browser**.  Really, you'll have a better time on a mobile sized browser.
 <br>
 <br>
 **NOTE!!!**
 <br>
-Lots of features are currently ~~missing~~ under development.  Everything **should be** playable.
+Lots of features are currently ~~missing~~ under development.  Everything **should be** playable though.
 <br>
 <br>
 
@@ -28,6 +33,7 @@ Lots of features are currently ~~missing~~ under development.  Everything **shou
 - Front end - ReactJS, firebase authentication, and firestore to subscribe to live updates of lobby/game states from the database.
 - REST API - ExpressJS, validates player actions and updates the database.
 - Database - Firestore
+- Styling - Vanilla CSS
 
 
 <br>
