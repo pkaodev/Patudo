@@ -1,6 +1,5 @@
 
 import { useColorSwitcher } from '../../styling/useColorSwitcher';
-import { useLocation } from 'react-router-dom';
 import MenuBtn from './MenuBtn';
 import PatudoLogo from './PatudoLogo';
 
@@ -9,7 +8,7 @@ export default function Navbar({BGProps}) {
   const {colorState, switchColor} = useColorSwitcher();
 
   return (
-  <div className={`navbar-holder`}>
+  <div className={'navbar-holder'}>
     <nav className={`navbar ${colorState && `color${colorState}`}`}>
 
     <PatudoLogo switchColor={switchColor} appBGState={BGProps.appBGState}/>
