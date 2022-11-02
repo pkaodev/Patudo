@@ -2,6 +2,11 @@ import {moveBet, moveBS, moveCabbages} from './models.js';
 import { fetchGameState, checkPlayerInGame, checkMoveNumber, checkMoveTypeIsValid, checkGameIsntOver } from './firebase/firebaseFunctionsAPI.js';
 import {fetchAllTheDice} from './firebase/firebaseFunctionsAPI.js';
 
+/**
+ * !!!extract check functions into single function
+ * !!!separate controller into multiple endpoints
+ */
+
 export const controller = async (uid, body, res, next) => {
 
     const { gameCode, moveNumber, moveType, betValue} = body;

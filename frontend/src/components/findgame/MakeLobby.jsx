@@ -3,6 +3,12 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../firebase/AuthContext";
 
+
+/**
+ * !!!check name length/exists already
+ */
+
+
 export default function MakeLobby({nickname}) {
   const navigate = useNavigate();
   const { currentUser } = useAuth();

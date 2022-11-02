@@ -26,7 +26,17 @@ export default function PAGE_Lobby() {
     autoSubscribeToLobby(lobbyCode, currentUser.uid, setLobbyState)
   }, []);
 
-  //if game has started navigate to /game/:gameCode
+  //!!!TEMPORARY HACKY FIX - THIS WILL BE REMOVED SOON!!!
+  //if game hasn't been played for a while the host doesn't see updated player list
+  //will be resolved when lobby/game creation is moved to API
+  useEffect(() => {
+    const interval = setInterval(() => {
+      autoSubscribeToLobby(lobbyCode, currentUser.uid, setLobbyState)
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  //navigate to /game/:gameCode when game has started
   useEffect(() => {
     if (lobbyState.gameHasStarted) {
       navigate(`/Patudo-v0/game/${lobbyCode}`);

@@ -21,7 +21,7 @@ export default function Cabbages({isValid}) {
         disabled={!isValid}
         className={`${!isValid ? "faded-text" : ""}`}
       >
-        Cbgs
+        Cabbages
       </button>
     </div>
   );

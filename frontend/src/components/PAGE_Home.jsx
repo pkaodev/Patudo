@@ -1,6 +1,11 @@
 export default function PAGE_Home() {
   return (
     <div className="home-placeholder flex-column take-up-whole-space">
+      IMPORTANT NOTICE:
+      <br />
+      IF YOU CAN'T SEE A PLAYER JOIN THE LOBBY PLEASE GO BACK AND MAKE ANOTHER LOBBY - THIS IS HAPPENING IF PATUDO HASN'T BEEN PLAYED FOR A WHILE - THIS BUG WILL BE RESOLVED SOON
+      <br />
+      <br />
     Welcome!
     <br />
     <br />
@@ -17,6 +22,9 @@ export default function PAGE_Home() {
     <br />
     <br />
     Thank you for playing!
+    <br />
+    <br />
+    P.S If you are a potential employer, don't worry, the final home page will be a lot more interesting.
     </div>
   );
 }

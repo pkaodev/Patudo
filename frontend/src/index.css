@@ -1,4 +1,3 @@
-
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -131,9 +130,7 @@ table {
   border-spacing: 0;
 }
 
-/*---------------------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------------------*/
+/*-----FONTS----------------------------------------------------------------------------------*/
 @font-face {
   font-family: "JetBrainsMono-Bold";
   src: local("JetBrainsMono-Bold"),
@@ -164,7 +161,7 @@ table {
     url("./fonts/AtarianSystem/sf-atarian-system.extended-bold.ttf")
       format("truetype");
 }
-/*---------------------------------------------------------------------------------------*/
+/*-----GENERAL ELEMENTS----------------------------------------------------------------------------------*/
 
 button,
 input[type="submit"],
@@ -206,16 +203,7 @@ button:active {
   transform: translateY(4px);
 }
 
-/*---------------------------------------------------------------------------------------*/
-:root {
-  --color1: 255, 182, 0;
-  --color2: 68, 169, 204;
-  --color3: 235, 86, 58;
-  --color4: 244, 185, 152;
-  --color5: 80, 188, 185;
-  --color6: 152, 244, 185;
-  --color7: 185, 152, 244;
-}
+/*-----COLOURS----------------------------------------------------------------------------------*/
 /*
 --color1: rgb(255, 182, 0);
 --color2: rgb(68, 169, 204);
@@ -225,7 +213,15 @@ button:active {
 --color6: rgb(152, 244, 185)
 --color7: rgb(185, 152, 244);
 */
-/*---------------------------------------------------------------------------------------*/
+:root {
+  --color1: 255, 182, 0;
+  --color2: 68, 169, 204;
+  --color3: 235, 86, 58;
+  --color4: 244, 185, 152;
+  --color5: 80, 188, 185;
+  --color6: 152, 244, 185;
+  --color7: 185, 152, 244;
+}
 
 /*-----Basic-skeleton---------------------------------------------------------------------------------*/
 .app-router {
@@ -540,7 +536,6 @@ button:active {
   animation: eliminated 1s ease infinite;
 }
 
-
 /*-general classes--------------------------------------------------------------------------------------*/
 .faded-text {
   color: rgba(0, 0, 0, 0.5);
@@ -551,7 +546,6 @@ button:active {
 .opacity-50 {
   opacity: 0.5;
 }
-/*---------------------------------------------------------------------------------------*/
 /*-table and opponent areas--------------------------------------------------------------------------------------*/
 .table-area-holder {
   height: 24%;
@@ -586,7 +580,6 @@ button:active {
   top: 50%;
   /* overflow: hidden; !!!issue when 6 player*/
   text-align: center;
-
 }
 .opponent__dice-holder {
   display: flex;
@@ -649,7 +642,6 @@ button:active {
   }
 }
 
-
 .winner-avatar-message {
   position: relative;
   height: 100%;
@@ -675,7 +667,6 @@ button:active {
 .winner-king {
   height: 100%;
 }
-
 
 /*-own dice area--------------------------------------------------------------------------------------*/
 .own-cup-area-holder {
@@ -878,24 +869,8 @@ button:active {
   transform: translate(-50%, -50%);
 }
 
-.br-s {
-  border-radius: 0.5vmin;
-}
-.br-m {
-  border-radius: 1vmin;
-}
-.br-l {
-  border-radius: 2vmin;
-}
-
 .padding-sides-s {
   padding: 0 0.5vmin;
-}
-.padding-sides-m {
-  padding: 0 1vmin;
-}
-.padding-sides-l {
-  padding: 0 2vmin;
 }
 
 .how-to-play {

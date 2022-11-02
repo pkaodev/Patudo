@@ -18,6 +18,7 @@ export default function Nickname({props: {nickname, setNickname}}) {
         type="text"
         value={nickname}
         maxLength={7}
+        //!!!this isn't doing anything
         minLength={1}
         onChange={(e) => handleNicknameChange(e)}
       />
