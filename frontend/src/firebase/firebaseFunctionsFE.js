@@ -239,8 +239,13 @@ export const apiPUTMove = async (e, currentUser, gameCode, moveObject) => {
 
     const token = await currentUser.getIdToken(/* forceRefresh */ true);
 
+    //for development locally
+    // const resStream = await fetch(import.meta.env.VITE_API_ADDRESS_DEVELOPMENT, {
+
+    //for production
     const resStream = await fetch(import.meta.env.VITE_API_ADDRESS, {
-      method: "PUT",
+      
+    method: "PUT",
       body: JSON.stringify({ gameCode, moveNumber, moveType, betValue }),
       headers: new Headers({
         "Content-Type": "application/json",

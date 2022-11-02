@@ -47,7 +47,7 @@ export const moveBet = async (gameState, docId, uid, betValue, allTheDice) => {
 
   gameState.text.push({
     type: "bet",
-    text: [{style: "normal", text: `${gameState.players.find((player) => player.uid === uid).nickname} bet ${betValue}`}]
+    text: [{style: "normal", text: `${gameState.players.find((player) => player.uid === uid).nickname} bet ${betNumberOfDice} dice with value ${betFaceValue}`}]
   })
   gameState.currentBet = betValue;
   gameState.moveNumber = gameState.moveNumber + 1;

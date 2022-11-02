@@ -9,6 +9,7 @@ import { controller } from "./controller.js";
  */
 
 export const authoriser = async (req, res, next) => {
+  
   try {
     
     if (!req.headers.patauthtoken || !req.headers.patauthuid) {
@@ -22,13 +23,16 @@ export const authoriser = async (req, res, next) => {
       req.headers.patauthtoken
     );
 
-    //Call controller if token is valid
+    //call controller if token is valid
     if (decodedToken.uid !== req.headers.patauthuid) {
       throw new Error({
         status: 401,
         msg: "401 - unauthorized, incorrect uid",
       });
     }
+
+    //pass next
+    
 
     const response = await controller(
       req.headers.patauthuid,
@@ -42,8 +46,7 @@ export const authoriser = async (req, res, next) => {
 
 
   } catch (err) {
-    console.log(err);
-    next(err);
+    next(err)
   }
   
-};
+}

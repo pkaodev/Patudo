@@ -32,7 +32,7 @@ app.use(express.json());
  * starting game (not yet implemented)
  * sending game moves
  * 
- * !!! extract authorisation to middleware and separate into multiple endpoints
+ * !!! extract authorisation to middleware and separate rest into multiple endpoints
  */ 
 app.put('/tester', authoriser)
 

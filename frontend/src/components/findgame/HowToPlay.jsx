@@ -1,5 +1,10 @@
 import React from "react";
 
+/**
+ * 
+ */
+
+
 export default function HowToPlay() {
   return (
     <div className="padding-sides-s how-to-play">
