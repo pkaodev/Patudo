@@ -2,6 +2,7 @@ import { getAuth } from "firebase-admin/auth";
 import { controller } from "./controller.js";
 
 /**
+ * !!! extract authorisation to middleware and separate controller into multiple endpoints
  * 1. verify token
  * 2. call controller
  * 3. return response to user (200)
@@ -36,7 +37,7 @@ export const authoriser = async (req, res, next) => {
       next
     );
 
-      res.status(200).send(JSON.stringify(response));
+    res.status(200).send(JSON.stringify(response));
 
 
 

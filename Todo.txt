@@ -1,3 +1,6 @@
+Bugs:
+-lobby not updating for host sometimes (first attempt after game hasnt been played for a while?)
+
 Sooner:
 -account for keyboard on mobile lol
 -display opponent text/deciding... indicator

@@ -6,7 +6,6 @@ import { authoriser } from './authoriser.js';
 
 
 dotenv.config()
-//!!!LATER Using an OAuth 2.0 refresh token
 
 admin.initializeApp({
     credential: admin.credential.applicationDefault(),
@@ -25,14 +24,32 @@ app.use(express.json());
     // next()
 // })
 
+/**
+ * end-point for for everything:
+ * creating lobby (not yet implemented)
+ * joining lobby (not yet implemented)
+ * leaving lobby (not yet implemented)
+ * starting game (not yet implemented)
+ * sending game moves
+ * 
+ * !!! extract authorisation to middleware and separate into multiple endpoints
+ */ 
 app.put('/tester', authoriser)
 
-//error endpoints
+
+//ERRORS
 app.all('/*', (req, res) => {
     res.status(404).send({msg: 'Route not found'});
   });
 
 app.use((err, req, res, next) => {
+    /**
+     * custom error handling should be of shape:
+     * {
+     * status: <STATUS_CODE>,
+     * msg: <ERROR_MESSAGE>
+     * }
+     */
     if (err.status && err.msg) {
         res.status(err.status).send({msg: err.msg});
     }
@@ -44,6 +61,5 @@ const PORT = process.env.PORT || 8001;
 
 app.listen(PORT, (err) => {
   if (err) throw err;
-  console.log(`Listening on ${PORT}...`);
 });
 

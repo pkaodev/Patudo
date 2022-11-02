@@ -11,25 +11,27 @@ import {
   query,
   where,
 } from "firebase/firestore";
-//import and use dotenv
 import * as dotenv from "dotenv";
 
 dotenv.config();
 
 /**
+ * !!!make main check function which calls all other checks, only this one should be exported
  * move is valid if:
  * it is bet/bs/cabbages
  * bet - currentPlayer
  * bs - any player (but previous player)
  * bs and cabbages invalid as first move
  * cabbages - any player (but current player)
+ * !!!add code/msg to thrown errors
  */
 
+//returns a snapshot of the current game state from the db
 export const fetchGameState = async (gameCode) => {
   return await (await getDoc(doc(db, process.env.DB_GAMES, gameCode))).data();
 };
 
-//reformat into 2 functions!!!
+//returns true if the player is in the game
 export const checkPlayerInGame = (gameState, uid) => {
   const { players, losers } = gameState;
   for (let i = 0; i < players.length; i++) {
@@ -42,10 +44,11 @@ export const checkPlayerInGame = (gameState, uid) => {
       throw new Error("Player is out");
     }
   }
-  //Any point in throwing error here!!!
+
   throw new Error("Player not in game");
 };
 
+//returns true if the move number is valid
 export const checkMoveNumber = (gameState, moveNumber) => {
   if (moveNumber === gameState.moveNumber + 1) {
     return true;
@@ -53,6 +56,7 @@ export const checkMoveNumber = (gameState, moveNumber) => {
   throw new Error("Move number is not correct");
 };
 
+//returns true if the move type is valid for the player
 export const  checkMoveTypeIsValid  = (gameState, uid, moveType) => {
   if (!['cabbages', 'bs', 'bet'].includes(moveType)) {
     throw new Error(`Move type "${moveType}" is not valid`);
@@ -79,6 +83,9 @@ export const checkGameIsntOver = (gameState) => {
   return true;
 }
 
+/**
+ * returns object containing all the dice in the game
+ */
 export const fetchAllTheDice = async (gameCode) => {
 
   const allTheDice = {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0};
@@ -89,8 +96,8 @@ export const fetchAllTheDice = async (gameCode) => {
       collection(db, process.env.DB_PRIVATE),
       where("gameCode", "==", gameCode)));
   querySnap.forEach((doc) => {
-    doc.data().cup.forEach((die) => {
-      allTheDice[die]++;
+    doc.data().cup.forEach((dice) => {
+      allTheDice[dice]++;
   })});
   return allTheDice;
 }

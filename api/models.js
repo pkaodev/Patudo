@@ -5,8 +5,11 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
-//add returns to things!!!
-//!!!destructure and make prettier
+/**
+ * !!!extract each function into its own file
+ * !!!destructure and make prettier
+ * !!! add returns (is it helpful???) to send to FE
+ */
 
 export const moveBet = async (gameState, docId, uid, betValue, allTheDice) => {
   let [betNumberOfDice, betFaceValue] = betValue.split(",");
