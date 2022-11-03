@@ -2,6 +2,9 @@
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "./firebase/firebase.js";
 import * as dotenv from "dotenv";
+import { CustomPseudoError } from "./customPseudoError.js";
+
+
 
 dotenv.config();
 
@@ -26,15 +29,15 @@ export const moveBet = async (gameState, docId, uid, betValue, allTheDice) => {
     gameState.moveNumber > 0 &&
     betFaceValue !== currentFaceValue
   ) {
-    throw new Error(`pacifico, must bet same face value (${currentFaceValue})`);
+    throw new CustomPseudoError(`pacifico, must bet same face value (${currentFaceValue})`);
   }
 
   if (betFaceValue < 1 || betFaceValue > 6) {
-    throw new Error("Bet face value must be between 1 and 6");
+    throw new CustomPseudoError("Bet face value must be between 1 and 6");
   }
 
   if (betNumberOfDice > countDice(allTheDice)) {
-    throw new Error("Bet is too high");
+    throw new CustomPseudoError("Bet is too high");
   }
 
   if (
@@ -42,7 +45,7 @@ export const moveBet = async (gameState, docId, uid, betValue, allTheDice) => {
     (betFaceValue <= currentFaceValue &&
       betNumberOfDice === currentNumberOfDice)
   ) {
-    throw new Error("Bet value is too low");
+    throw new CustomPseudoError("Bet value is too low");
   }
 
   gameState.text.push({
@@ -105,7 +108,7 @@ export const moveCabbages = (gameState, docId, uid, allTheDice) => {
   const player = gameState.players.find((player) => player.uid === uid);
   
   if (player.numberOfDice === 5) {
-    throw new Error("You can't move cabbages when you have 5 dice!");
+    throw new CustomPseudoError("You can't move cabbages when you have 5 dice!");
   }
 
   const oldTotalDice = countDice(allTheDice);

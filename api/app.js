@@ -3,6 +3,7 @@ import cors from 'cors';
 import admin from "firebase-admin";
 import * as dotenv from 'dotenv'
 import { authoriser } from './authoriser.js';
+import { controller } from "./controller.js";
 
 
 dotenv.config()
@@ -17,12 +18,12 @@ app.use(cors())
 app.use(express.json());
 
 //SHOW INCOMING REQUESTS!!!
-// app.use((req, res, next) => {
+app.use((req, res, next) => {
     // console.log(req.headers.patauthuid)
     // console.log(req.headers.patauthtoken)
-    // console.log('req.body', req.body)
-    // next()
-// })
+    console.log('req.body', req.body)
+    next()
+})
 
 /**
  * end-point for for everything:
@@ -34,7 +35,13 @@ app.use(express.json());
  * 
  * !!! extract authorisation to middleware and separate rest into multiple endpoints
  */ 
-app.put('/tester', authoriser)
+
+
+app.use(authoriser)
+
+//!!!rename to /gameMove
+app.put('/tester', controller)
+
 
 
 //ERRORS
@@ -43,17 +50,21 @@ app.all('/*', (req, res) => {
   });
 
 app.use((err, req, res, next) => {
+  // console.log('ERROR', err.msg)
     /**
      * custom error handling should be of shape:
      * {
      * status: <STATUS_CODE>,
-     * msg: <ERROR_MESSAGE>
+     * message: <ERROR_MESSAGE>
      * }
      */
-    if (err.status && err.msg) {
-        res.status(err.status).send({msg: err.msg});
+    if (err.statusCode && err.message) {
+      console.log('CUSTOM ERROR', err)
+        res.status(err.statusCode).send({message: err.message});
+    } else {
+    console.log('500 ERROR')
+    res.status(500).send({message: 'Server error'});
     }
-    res.status(500).send({msg: 'Server error'});
 })
 
 
