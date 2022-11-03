@@ -1,52 +1,24 @@
 import { getAuth } from "firebase-admin/auth";
 import { controller } from "./controller.js";
+import { CustomError } from "./ErrorClasses.js";
 
-/**
- * !!! extract authorisation to middleware and separate controller into multiple endpoints
- * 1. verify token
- * 2. call controller
- * 3. return response to user (200)
- */
-
+//middle ware that checks if user is authenticated
 export const authoriser = async (req, res, next) => {
-  
   try {
-    
     if (!req.headers.patauthtoken || !req.headers.patauthuid) {
-      throw new Error({
-        status: 401,
-        msg: "401 - unauthorized, missing headers",
-      });
+      throw new CustomError("401 - unauthorized, missing headers", 401);
     }
 
     const decodedToken = await getAuth().verifyIdToken(
       req.headers.patauthtoken
     );
 
-    //call controller if token is valid
     if (decodedToken.uid !== req.headers.patauthuid) {
-      throw new Error({
-        status: 401,
-        msg: "401 - unauthorized, incorrect uid",
-      });
+      throw new CustomError("401 - unauthorized, mismatched uid", 401);
     }
 
-    //pass next
-    
-
-    const response = await controller(
-      req.headers.patauthuid,
-      req.body,
-      res,
-      next
-    );
-
-    res.status(200).send(JSON.stringify(response));
-
-
-
+    next();
   } catch (err) {
-    next(err)
+    next(err);
   }
-  
-}
+};

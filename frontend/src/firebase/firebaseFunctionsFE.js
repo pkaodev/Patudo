@@ -70,7 +70,7 @@ export const handleMakeLobby = async (e, uid, nickname, navigate) => {
       createdAt: new Date(),
       admin: uid,
       players: [{ uid, nickname }],
-      hasStarted: false,
+      gameHasStarted: false,
   };
     const docRef = await setDoc(
       doc(db, import.meta.env.VITE_DB_LOBBIES, lobbyCode),
@@ -240,10 +240,10 @@ export const apiPUTMove = async (e, currentUser, gameCode, moveObject) => {
     const token = await currentUser.getIdToken(/* forceRefresh */ true);
 
     //for development locally
-    // const resStream = await fetch(import.meta.env.VITE_API_ADDRESS_DEVELOPMENT, {
+    const resStream = await fetch(import.meta.env.VITE_API_ADDRESS_DEVELOPMENT, {
 
     //for production
-    const resStream = await fetch(import.meta.env.VITE_API_ADDRESS, {
+    // const resStream = await fetch(import.meta.env.VITE_API_ADDRESS, {
       
     method: "PUT",
       body: JSON.stringify({ gameCode, moveNumber, moveType, betValue }),

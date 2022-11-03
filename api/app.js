@@ -3,6 +3,7 @@ import cors from 'cors';
 import admin from "firebase-admin";
 import * as dotenv from 'dotenv'
 import { authoriser } from './authoriser.js';
+import { controller } from "./controller.js";
 
 
 dotenv.config()
@@ -34,26 +35,27 @@ app.use(express.json());
  * 
  * !!! extract authorisation to middleware and separate rest into multiple endpoints
  */ 
-app.put('/tester', authoriser)
 
 
-//ERRORS
+app.use(authoriser)
+
+//!!!rename or split???
+app.put('/tester', controller)
+
+
+
 app.all('/*', (req, res) => {
     res.status(404).send({msg: 'Route not found'});
   });
 
 app.use((err, req, res, next) => {
-    /**
-     * custom error handling should be of shape:
-     * {
-     * status: <STATUS_CODE>,
-     * msg: <ERROR_MESSAGE>
-     * }
-     */
-    if (err.status && err.msg) {
-        res.status(err.status).send({msg: err.msg});
+    if (err.statusCode && err.message) {
+      console.log('CUSTOM ERROR', err)
+        res.status(err.statusCode).send(err.message);
+    } else {
+    console.log('500 ERROR')
+    res.status(500).send({message: 'Server error'});
     }
-    res.status(500).send({msg: 'Server error'});
 })
 
 

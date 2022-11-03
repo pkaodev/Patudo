@@ -22,9 +22,10 @@ export default function PAGE_Lobby() {
   const { lobbyCode } = useParams();
   const [lobbyState, setLobbyState] = useState(lobbyObjSHAPE);
   
-  useEffect(() => {
-    autoSubscribeToLobby(lobbyCode, currentUser.uid, setLobbyState)
-  }, []);
+  //!!!use this instead of below when bug is fixed
+  // useEffect(() => {
+  //   autoSubscribeToLobby(lobbyCode, currentUser.uid, setLobbyState)
+  // }, []);
 
   //!!!TEMPORARY HACKY FIX - THIS WILL BE REMOVED SOON!!!
   //if game hasn't been played for a while the host doesn't see updated player list

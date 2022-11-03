@@ -7,18 +7,31 @@ import {fetchAllTheDice} from './firebase/firebaseFunctionsAPI.js';
  * !!!separate controller into multiple endpoints
  */
 
-export const controller = async (uid, body, res, next) => {
+// export const controller = async (uid, body, res, next) => {
+export const controller = async (req, res, next) => {
+
+    try {
+
+    const uid = req.headers.patauthuid;
+    const body = req.body;
+
 
     const { gameCode, moveNumber, moveType, betValue} = body;
 
     const gameState = await fetchGameState(gameCode);
 
-    //PROMISE ALL!!!
+    //combine!!!
     checkGameIsntOver(gameState);
     checkPlayerInGame(gameState, uid);
     checkMoveNumber(gameState, moveNumber);
     checkMoveTypeIsValid(gameState, uid, moveType);
 
+
+
+    //old
+    // res.status(200).send(JSON.stringify(response));
+    // need to add a response to client, currently none
+    //pointless returns
     const allTheDice = await fetchAllTheDice(gameCode);
     if (moveType === 'bet') {
         return moveBet(gameState, gameCode, uid, betValue, allTheDice);
@@ -29,5 +42,9 @@ export const controller = async (uid, body, res, next) => {
     } else if (moveType === 'cabbages') {
         return moveCabbages(gameState, gameCode, uid, allTheDice);
     }
+
+} catch (err) {
+    next(err)
+  }
 
 }

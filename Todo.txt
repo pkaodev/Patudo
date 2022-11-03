@@ -1,5 +1,6 @@
 Bugs:
 -lobby not updating for host sometimes (first attempt after game hasnt been played for a while?)
+-api errors -> proper class extensions 
 
 Sooner:
 -account for keyboard on mobile lol
