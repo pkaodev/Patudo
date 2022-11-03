@@ -1,10 +1,7 @@
-
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "./firebase/firebase.js";
 import * as dotenv from "dotenv";
-import { CustomPseudoError } from "./customPseudoError.js";
-
-
+import { PseudoGameError } from "./pseudoErrors.js";
 
 dotenv.config();
 
@@ -23,21 +20,22 @@ export const moveBet = async (gameState, docId, uid, betValue, allTheDice) => {
   currentNumberOfDice = Number(currentNumberOfDice);
   currentFaceValue = Number(currentFaceValue);
 
-
   if (
     gameState.isPacifico &&
     gameState.moveNumber > 0 &&
     betFaceValue !== currentFaceValue
   ) {
-    throw new CustomPseudoError(`pacifico, must bet same face value (${currentFaceValue})`);
+    throw new PseudoGameError(
+      `pacifico, must bet same face value (${currentFaceValue})`
+    );
   }
 
   if (betFaceValue < 1 || betFaceValue > 6) {
-    throw new CustomPseudoError("Bet face value must be between 1 and 6");
+    throw new PseudoGameError("Bet face value must be between 1 and 6");
   }
 
   if (betNumberOfDice > countDice(allTheDice)) {
-    throw new CustomPseudoError("Bet is too high");
+    throw new PseudoGameError("Bet is too high");
   }
 
   if (
@@ -45,13 +43,20 @@ export const moveBet = async (gameState, docId, uid, betValue, allTheDice) => {
     (betFaceValue <= currentFaceValue &&
       betNumberOfDice === currentNumberOfDice)
   ) {
-    throw new CustomPseudoError("Bet value is too low");
+    throw new PseudoGameError("Bet value is too low");
   }
 
   gameState.text.push({
     type: "bet",
-    text: [{style: "normal", text: `${gameState.players.find((player) => player.uid === uid).nickname} bet ${betNumberOfDice} dice with value ${betFaceValue}`}]
-  })
+    text: [
+      {
+        style: "normal",
+        text: `${
+          gameState.players.find((player) => player.uid === uid).nickname
+        } bet ${betNumberOfDice} dice with value ${betFaceValue}`,
+      },
+    ],
+  });
   gameState.currentBet = betValue;
   gameState.moveNumber = gameState.moveNumber + 1;
   gameState.currentPlayer =
@@ -61,8 +66,7 @@ export const moveBet = async (gameState, docId, uid, betValue, allTheDice) => {
     merge: true,
   });
 
-  return 'bet accepted';
-
+  return "bet accepted";
 };
 
 export const moveBS = (gameState, docId, uid, allTheDice) => {
@@ -70,19 +74,35 @@ export const moveBS = (gameState, docId, uid, allTheDice) => {
     .split(",")
     .map((string) => Number(string));
 
-    gameState.text.push({
-      type: "bs1",
-      text: [{style: "normal", text: `${gameState.players.find((player) => player.uid === uid).nickname} called BS on ${gameState.players[(gameState.currentPlayer + gameState.players.length - 1) % gameState.players.length].nickname}'s bet of ${gameState.currentBet}`}]
-    })
-      
-    const diceWithFaceValue = countDice(allTheDice, currentBetFaceValue);
-    const oldTotalDice = countDice(allTheDice);
+  gameState.text.push({
+    type: "bs1",
+    text: [
+      {
+        style: "normal",
+        text: `${
+          gameState.players.find((player) => player.uid === uid).nickname
+        } called BS on ${
+          gameState.players[
+            (gameState.currentPlayer + gameState.players.length - 1) %
+              gameState.players.length
+          ].nickname
+        }'s bet of ${gameState.currentBet}`,
+      },
+    ],
+  });
 
-    gameState.text.push({
-      type: "bs2",
-      text: [{style: "normal", text: `There are ${diceWithFaceValue} dice with value ${currentBetFaceValue}`}]
-    })
+  const diceWithFaceValue = countDice(allTheDice, currentBetFaceValue);
+  const oldTotalDice = countDice(allTheDice);
 
+  gameState.text.push({
+    type: "bs2",
+    text: [
+      {
+        style: "normal",
+        text: `There are ${diceWithFaceValue} dice with value ${currentBetFaceValue}`,
+      },
+    ],
+  });
 
   if (countDice(allTheDice, currentBetFaceValue) >= currentBetNumberOfDice) {
     console.log("BS was incorrect");
@@ -97,39 +117,53 @@ export const moveBS = (gameState, docId, uid, allTheDice) => {
           gameState.players.length
       ].uid,
       oldTotalDice
-      );
-    }
+    );
+  }
 
   return "BS was called";
-
 };
 
 export const moveCabbages = (gameState, docId, uid, allTheDice) => {
   const player = gameState.players.find((player) => player.uid === uid);
-  
+
   if (player.numberOfDice === 5) {
-    throw new CustomPseudoError("You can't move cabbages when you have 5 dice!");
+    throw new PseudoGameError(
+      "You can't move cabbages when you have 5 dice!"
+    );
   }
 
   const oldTotalDice = countDice(allTheDice);
-  
+
   gameState.text.push({
     type: "cabbages1",
-    text: [{style: "normal", text: `${player.nickname} called cabbages on ${gameState.players[(gameState.currentPlayer + gameState.players.length - 1) % gameState.players.length].nickname}'s bet of ${gameState.currentBet}`}]
-  })
+    text: [
+      {
+        style: "normal",
+        text: `${player.nickname} called cabbages on ${
+          gameState.players[
+            (gameState.currentPlayer + gameState.players.length - 1) %
+              gameState.players.length
+          ].nickname
+        }'s bet of ${gameState.currentBet}`,
+      },
+    ],
+  });
 
-  
-  let [currentBetNumberOfDice, currentBetFaceValue] = gameState.currentBet.split(",");
+  let [currentBetNumberOfDice, currentBetFaceValue] =
+    gameState.currentBet.split(",");
   currentBetNumberOfDice = Number(currentBetNumberOfDice);
   currentBetFaceValue = Number(currentBetFaceValue);
 
   const diceWithFaceValue = countDice(allTheDice, currentBetFaceValue);
   gameState.text.push({
     type: "cabbages2",
-    text: [{style: "normal", text: `There are ${diceWithFaceValue} dice with value ${currentBetFaceValue}`}]
-  })
-
-
+    text: [
+      {
+        style: "normal",
+        text: `There are ${diceWithFaceValue} dice with value ${currentBetFaceValue}`,
+      },
+    ],
+  });
 
   if (countDice(allTheDice, currentBetFaceValue) !== currentBetNumberOfDice) {
     roundEndLoseDice(gameState, docId, uid, oldTotalDice);
@@ -138,7 +172,6 @@ export const moveCabbages = (gameState, docId, uid, allTheDice) => {
   }
 
   return "cabbages were moved";
-
 };
 
 const roundEndLoseDice = (gameState, docId, uid, oldTotalDice) => {
@@ -148,10 +181,11 @@ const roundEndLoseDice = (gameState, docId, uid, oldTotalDice) => {
   );
 
   player.numberOfDice--;
-  console.log(`${player.name} lost a dice and now has ${player.numberOfDice} left`);  
+  console.log(
+    `${player.name} lost a dice and now has ${player.numberOfDice} left`
+  );
 
   const playerIsOut = player.numberOfDice === 0;
-
 
   if (playerIsOut) {
     gameState.losers.push({ uid: player.uid, nickname: player.nickname });
@@ -159,10 +193,13 @@ const roundEndLoseDice = (gameState, docId, uid, oldTotalDice) => {
 
     gameState.text.push({
       type: "eliminated",
-      text: [{style: "eliminated", text: `${player.nickname} has been eliminated!`}]
-    })
-
-
+      text: [
+        {
+          style: "eliminated",
+          text: `${player.nickname} has been eliminated!`,
+        },
+      ],
+    });
 
     console.log("player out, checking if game is over");
     if (isGameOver(gameState)) {
@@ -171,9 +208,13 @@ const roundEndLoseDice = (gameState, docId, uid, oldTotalDice) => {
 
       gameState.text.push({
         type: "gameOver",
-        text: [{style: "winner", text: `Game over! ${gameState.players[0].nickname} wins with ${gameState.players[0].numberOfDice} dice left!`}]
-      })
-
+        text: [
+          {
+            style: "winner",
+            text: `Game over! ${gameState.players[0].nickname} wins with ${gameState.players[0].numberOfDice} dice left!`,
+          },
+        ],
+      });
     }
     setCurrentPlayerToNextPlayer(gameState, uid);
   } else {
@@ -181,15 +222,21 @@ const roundEndLoseDice = (gameState, docId, uid, oldTotalDice) => {
   }
 
   if (!playerIsOut) {
-  gameState.text.push({
-    type: "loss",
-    text: [{style: "loss", text: `${player.nickname} lost a dice and now has ${player.numberOfDice} left`}]
-    })}
+    gameState.text.push({
+      type: "loss",
+      text: [
+        {
+          style: "loss",
+          text: `${player.nickname} lost a dice and now has ${player.numberOfDice} left`,
+        },
+      ],
+    });
+  }
 
   gameState.round++;
   gameState.currentBet = "1,0";
   gameState.moveNumber = 0;
-  
+
   if (gameState.isPacifico) {
     gameState.isPacifico = false;
   }
@@ -198,31 +245,42 @@ const roundEndLoseDice = (gameState, docId, uid, oldTotalDice) => {
     gameState.isPacifico = true;
     gameState.text.push({
       type: "pacifico",
-      text: [{style: "normal", text: `${player.nickname} is now pacifico!`}]
-    })
+      text: [{ style: "normal", text: `${player.nickname} is now pacifico!` }],
+    });
   }
   if (gameState.isPacifico) {
     console.log("pacifico");
   }
 
-  
   gameState.players.forEach((player) => {
     setDoc(
       doc(db, process.env.DB_PRIVATE, `${docId}-${player.uid}`),
       { cup: rollDice(player.numberOfDice) },
       { merge: true }
-      );
-    });
-    
-    if (!gameState.isOver) {
+    );
+  });
+
+  if (!gameState.isOver) {
     gameState.text.push({
       type: "round1",
-      text: [{style: "bold", text: `Round ${gameState.round}: ${--oldTotalDice} dice remaining`}]
-    })
+      text: [
+        {
+          style: "bold",
+          text: `Round ${gameState.round}: ${--oldTotalDice} dice remaining`,
+        },
+      ],
+    });
     gameState.text.push({
       type: "round2",
-      text: [{style: "normal", text: `${gameState.players[gameState.currentPlayer].nickname} is starting`}]
-    })
+      text: [
+        {
+          style: "normal",
+          text: `${
+            gameState.players[gameState.currentPlayer].nickname
+          } is starting`,
+        },
+      ],
+    });
   }
 
   setDoc(doc(db, process.env.DB_GAMES, docId), gameState, { merge: true });
@@ -234,8 +292,13 @@ const roundEndGainDice = (gameState, docId, uid, oldTotalDice) => {
 
   gameState.text.push({
     type: "gain",
-    text: [{style: "gain", text: `${player.nickname} gained a dice and now has ${player.numberOfDice}`}]
-    })
+    text: [
+      {
+        style: "gain",
+        text: `${player.nickname} gained a dice and now has ${player.numberOfDice}`,
+      },
+    ],
+  });
 
   setCurrentPlayerToUid(gameState, uid);
 
@@ -254,12 +317,22 @@ const roundEndGainDice = (gameState, docId, uid, oldTotalDice) => {
   oldTotalDice++;
   gameState.text.push({
     type: "round1",
-    text: [{style: "bold", text: `Round ${gameState.round}:`},{style: "norma", text: `${oldTotalDice} dice remaining`}]
-  })
+    text: [
+      { style: "bold", text: `Round ${gameState.round}:` },
+      { style: "norma", text: `${oldTotalDice} dice remaining` },
+    ],
+  });
   gameState.text.push({
     type: "round2",
-    text: [{style: "normal", text: `${gameState.players[gameState.currentPlayer].nickname} is starting`}]
-  })
+    text: [
+      {
+        style: "normal",
+        text: `${
+          gameState.players[gameState.currentPlayer].nickname
+        } is starting`,
+      },
+    ],
+  });
 
   setDoc(doc(db, process.env.DB_GAMES, docId), gameState, { merge: true });
 };
@@ -309,7 +382,6 @@ const setCurrentPlayerToNextPlayer = (gameState, uid) => {
     }
   }
 };
-
 
 const rollDice = (numberOfDice) => {
   const dice = [];
