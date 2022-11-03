@@ -1,15 +1,12 @@
 import { getAuth } from "firebase-admin/auth";
 import { controller } from "./controller.js";
-import { PseudoCustomError } from "./pseudoErrors.js";
+import { CustomError } from "./ErrorClasses.js";
 
 //middle ware that checks if user is authenticated
 export const authoriser = async (req, res, next) => {
   try {
     if (!req.headers.patauthtoken || !req.headers.patauthuid) {
-      throw new PseudoCustomError({
-        status: 401,
-        msg: "401 - unauthorized, missing headers",
-      });
+      throw new CustomError("401 - unauthorized, missing headers", 401);
     }
 
     const decodedToken = await getAuth().verifyIdToken(
@@ -17,10 +14,7 @@ export const authoriser = async (req, res, next) => {
     );
 
     if (decodedToken.uid !== req.headers.patauthuid) {
-      throw new PseudoCustomError({
-        status: 401,
-        msg: "401 - unauthorized, incorrect uid",
-      });
+      throw new CustomError("401 - unauthorized, mismatched uid", 401);
     }
 
     next();

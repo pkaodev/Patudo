@@ -1,5 +1,5 @@
 import { db } from "./firebase.js";
-import { PseudoGameError } from "../pseudoErrors.js";
+import { GameError } from "../ErrorClasses.js";
 
 import {
   collection,
@@ -42,11 +42,11 @@ export const checkPlayerInGame = (gameState, uid) => {
   }
   for (let i = 0; i < losers.length; i++) {
     if (losers[i].uid === uid) {
-      throw new PseudoGameError("Player is out");
+      throw new GameError("Player is out");
     }
   }
 
-  throw new PseudoGameError("Player not in game");
+  throw new GameError("Player not in game");
 };
 
 //returns true if the move number is valid
@@ -54,19 +54,19 @@ export const checkMoveNumber = (gameState, moveNumber) => {
   if (moveNumber === gameState.moveNumber + 1) {
     return true;
   }
-  throw new PseudoGameError("Move number is not correct");
+  throw new GameError("Move number is not correct");
 };
 
 //returns true if the move type is valid for the player
 export const checkMoveTypeIsValid = (gameState, uid, moveType) => {
   if (!["cabbages", "bs", "bet"].includes(moveType)) {
-    throw new PseudoGameError(`Move type "${moveType}" is not valid`);
+    throw new GameError(`Move type "${moveType}" is not valid`);
   }
   if (
     moveType === "bet" &&
     gameState.players[gameState.currentPlayer].uid !== uid
   ) {
-    throw new PseudoGameError('Move type "bet" is not valid for this player');
+    throw new GameError('Move type "bet" is not valid for this player');
   }
   if (
     moveType === "bs" &&
@@ -75,7 +75,7 @@ export const checkMoveTypeIsValid = (gameState, uid, moveType) => {
         gameState.players.length
     ].uid === uid
   ) {
-    throw new PseudoGameError('Move type "bs" is not valid for this player');
+    throw new GameError('Move type "bs" is not valid for this player');
   }
   if (
     moveType === "cabbages" &&
@@ -85,7 +85,7 @@ export const checkMoveTypeIsValid = (gameState, uid, moveType) => {
           gameState.players.length
       ].uid === uid)
   ) {
-    throw new PseudoGameError(
+    throw new GameError(
       'Move type "cabbages" is not valid for this player'
     );
   }
@@ -93,7 +93,7 @@ export const checkMoveTypeIsValid = (gameState, uid, moveType) => {
     (moveType === "bs" && gameState.moveNumber === 0) ||
     (moveType === "cabbages" && gameState.moveNumber === 0)
   ) {
-    throw new PseudoGameError(
+    throw new GameError(
       'Move type "bs" or "cabbages" is not valid for first move'
     );
   }
@@ -102,7 +102,7 @@ export const checkMoveTypeIsValid = (gameState, uid, moveType) => {
 
 export const checkGameIsntOver = (gameState) => {
   if (gameState.isOver) {
-    throw new PseudoGameError("Game is over");
+    throw new GameError("Game is over");
   }
   return true;
 };

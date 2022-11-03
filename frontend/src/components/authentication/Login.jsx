@@ -21,7 +21,6 @@ export default function Login() {
       await login(emailRef.current.value, passwordRef.current.value);
       navigate("/Patudo-v0/find-game");
     } catch (err) {
-      console.log(err.code);
       if (err.code === "auth/user-not-found") {
         setError("User not found");
       } else if (err.code === "auth/wrong-password") {

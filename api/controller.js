@@ -15,9 +15,6 @@ export const controller = async (req, res, next) => {
     const uid = req.headers.patauthuid;
     const body = req.body;
 
-    console.log('controller called')
-    console.log('uid', uid)
-    console.log('body', body)
 
     const { gameCode, moveNumber, moveType, betValue} = body;
 
@@ -34,6 +31,7 @@ export const controller = async (req, res, next) => {
     //old
     // res.status(200).send(JSON.stringify(response));
     // need to add a response to client, currently none
+    //pointless returns
     const allTheDice = await fetchAllTheDice(gameCode);
     if (moveType === 'bet') {
         return moveBet(gameState, gameCode, uid, betValue, allTheDice);
