@@ -1,0 +1,10 @@
+Current:
+- Setup test suite
+- Setup basic non-main github actions
+- Setup docker environment (make file?)
+- Core game logic
+
+-spring/docker/restful microservices
+
+Later:
+
